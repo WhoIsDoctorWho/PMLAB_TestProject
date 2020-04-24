@@ -1,38 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PMLAB_TestProject.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace PMLAB_TestProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CalculatorController : ControllerBase
-    {
+    {        
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<double>> Post([FromQuery]string expression, [FromServices]HistoryService historyService, [FromServices]CalculatorService calculator)
         {
-            throw new NotImplementedException();
-        }
-        [HttpGet("{expression}")]
-        public ActionResult<string> Get(string expression)
-        {
-            throw new NotImplementedException();
-        }
-        [HttpPost]
-        public ActionResult<string> Post([FromServices]CalculatorService calculator, [FromBody]string expression)
-        {
+            string history = string.Empty;
             try
-            {                
-                return Ok(calculator.Calculate(expression));
+            {
+                double result = calculator.Calculate(expression);
+                history = $"{expression} = {result}";
+                return Ok(result);
+            }
+            catch (DivideByZeroException ex)
+            {
+                history = ex.Message;
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                history = ex.Message;
+                return BadRequest($"Incorrect input, please, try again\n{expression}\n{ex.Message}");
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
-            }            
+                return BadRequest($"Something went wrong, please, try again later\n{ex.Message}");
+            }
+            finally
+            {
+                await historyService.Append(history);
+            }
         }
     }
 }

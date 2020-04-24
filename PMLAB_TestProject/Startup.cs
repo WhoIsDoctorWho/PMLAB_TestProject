@@ -15,13 +15,12 @@ namespace PMLAB_TestProject
         }
 
         public IConfiguration Configuration { get; }
-       
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-
-            services.AddTransient<Services.CalculatorService>();
+            services.AddCalculatorService();
+            services.AddHistoryService();
 
             services.AddSwaggerGen(options => 
                 options.SwaggerDoc("PMLAB_Test", 
