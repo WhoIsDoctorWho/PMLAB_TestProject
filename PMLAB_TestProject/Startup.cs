@@ -26,8 +26,7 @@ namespace PMLAB_TestProject
                 options.SwaggerDoc("PMLAB_Test", 
                 new OpenApiInfo { Title = "My solution to PMLAB test", Version = "v1" })
             );
-        }
-        
+        }        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace PMLAB_TestProject.Services
                 }
                 return true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }        
@@ -38,7 +39,7 @@ namespace PMLAB_TestProject.Services
                 }
                 return result.ToString().Trim();                
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return string.Empty;
             }
@@ -52,7 +53,7 @@ namespace PMLAB_TestProject.Services
                     return (await sr.ReadToEndAsync()).Trim();
                 }
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -68,7 +69,7 @@ namespace PMLAB_TestProject.Services
                 }
                 return true;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }

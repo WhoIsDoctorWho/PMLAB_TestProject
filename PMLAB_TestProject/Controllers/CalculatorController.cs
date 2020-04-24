@@ -10,7 +10,8 @@ namespace PMLAB_TestProject.Controllers
     public class CalculatorController : ControllerBase
     {        
         [HttpGet]
-        public async Task<ActionResult<double>> Post([FromQuery]string expression, [FromServices]HistoryService historyService, [FromServices]CalculatorService calculator)
+        public async Task<ActionResult<double>> Get([FromQuery]string expression,
+            [FromServices]HistoryService historyService, [FromServices]CalculatorService calculator)
         {
             string history = string.Empty;
             try
