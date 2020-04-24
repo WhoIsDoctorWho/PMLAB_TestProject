@@ -1,7 +1,7 @@
-My solution of WebApi + Swagger UI Calculator
-Using NCalc for evaluating string requests
+#My solution of WebApi + Swagger UI Calculator
+#Using NCalc for evaluating string requests
 
-Calculator
+##Calculator
 
 path: https://localhost:44302/api/Calculator?expression={YourExpression}
 method: Get
@@ -10,7 +10,7 @@ returns: result (if input is correct), 400 otherwise
 
 
 
-History
+##History
 
 path: https://localhost:44302/api/History
 method: Get
