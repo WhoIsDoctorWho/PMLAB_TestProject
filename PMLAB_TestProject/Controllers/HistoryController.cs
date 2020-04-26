@@ -12,7 +12,7 @@ namespace PMLAB_TestProject.Controllers
         public async Task<ActionResult<string>> Get([FromServices]HistoryService historyService)
         {
             string result = await historyService.GetAll();            
-            return result == string.Empty ? "History is empty" : result;
+            return result == string.Empty ? Ok("History is empty") : Ok(result);
         }
         [HttpGet("search")]
         public async Task<ActionResult<string>> Get([FromQuery]string request, [FromServices]HistoryService historyService)

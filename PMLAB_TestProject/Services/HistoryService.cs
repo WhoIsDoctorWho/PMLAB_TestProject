@@ -7,7 +7,11 @@ namespace PMLAB_TestProject.Services
 {
     public class HistoryService
     {
-        string path = "History/history.txt";
+        string path;
+        public HistoryService(string filepath = "History/history.txt") // for testing
+        {
+            path = filepath;
+        }
         public async Task<bool> Append(string newLine)
         {
             try
@@ -18,7 +22,7 @@ namespace PMLAB_TestProject.Services
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }        
